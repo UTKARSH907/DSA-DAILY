@@ -86,9 +86,7 @@ class GfG
            cHead=cHead.next;
            i++;
        }
-       if(cHead.next==null){
-           return cHead.data;
-       }
+       
        return cHead.data;
     }
 }
