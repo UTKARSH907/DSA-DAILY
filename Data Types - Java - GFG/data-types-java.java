@@ -18,7 +18,7 @@ class Geeks{
         double p = c/b;//c/b
         double q = b/a;//b/a
         double r = c/a;//c/a
-        double m = r+(double)l;//r+l
+        double m = r+l;//r+l
         int s = a/d;//a/d
         
         //Printing all the results 
