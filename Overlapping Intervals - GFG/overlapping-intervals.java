@@ -37,58 +37,48 @@ class GFG
 
 class Solution
 {
-    public static class Pair implements Comparable<Pair>{
-    int st;int ed;
-    Pair(int st,int ed){
-        this.st=st;
-        this.ed=ed;
-    }
-    
-    public int compareTo(Pair other){
-        if(this.st != other.st){
-            return this.st - other.st;
-        }else{
-            return this.ed - other.ed;
-        }
-    }
-}
     public int[][] overlappedInterval(int[][] Intervals)
     {
-        // Code here
-        Pair pair[]=new Pair[Intervals.length];
+        // Code here // Code here
+        // int ans[][]=new int[Intervals.length][2];
+        java.util.Arrays.sort(Intervals, new java.util.Comparator<int[]>() {
+    public int compare(int[] a, int[] b) {
+        return Integer.compare(a[0], b[0]);
+    }
+});
+
+ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+
+// for(int i=0;i<Intervals.length;i++){
+//     System.out.println(Intervals[i][0]+" "+Intervals[i][1]);
+// }
+        
         for(int i=0;i<Intervals.length;i++){
-            pair[i]=new Pair(Intervals[i][0],Intervals[i][1]);
-        
+            ArrayList<Integer> temp=new ArrayList<>();
+        if(i>0){
+            temp=ans.get(ans.size()-1);
         }
-        Arrays.sort(pair);
-        Stack<Pair> s=new Stack<>();
-        for(int i=0;i<pair.length;i++){
-            if(i==0){
-                s.push(pair[i]);
+            
+            if(i==0 || Intervals[i][0] > temp.get(1)){
+                ArrayList<Integer> al = new ArrayList<Integer>();
+                al.add(Intervals[i][0]);
+                al.add(Intervals[i][1]);
+                ans.add(al);
+                // System.out.println(ans);
             }else{
-                Pair top=s.peek();
-                if(pair[i].st > top.ed){
-                    s.push(pair[i]);
-                }else{
-                    top.ed=Math.max(top.ed,pair[i].ed);
-                }
+                
+                ans.remove(ans.size()-1);
+                temp.set(1,Math.max(temp.get(1), Intervals[i][1]));
+                ans.add(temp);
             }
+        } 
+        int t[][]=new int[ans.size()][2];
+        for(int i=0;i<ans.size();i++){
+            ArrayList<Integer> al=ans.get(i);
+            t[i][0]=al.get(0);
+            t[i][1]=al.get(1);
+            
         }
-        
-        Stack<Pair> sst=new Stack<>();
-        while(s.size()>0){
-            sst.push(s.pop());
-            // System.out.println(p.st+" "+p.ed);
-        }
-        // System.out.println(s.size());
-       int res[][]=new int[sst.size()][2];
-       int l=sst.size();
-      for(int i=0;i<l;i++){
-          Pair p=sst.pop();
-          res[i][0]=(int)p.st;
-          res[i][1]=(int)p.ed;
-      }
-       return res;
-   
-}
+      return t;  
+    }
 }
