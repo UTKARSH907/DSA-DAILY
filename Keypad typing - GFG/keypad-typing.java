@@ -24,34 +24,23 @@ class GFG {
 
 
 //Function to find matching decimal representation of a string as on the keypad.
-public static String printNumber(String s, int n) 
+public static String printNumber(String S, int n) 
 {
     //Your code here
-    String Str="";
-    for(int i=0;i<n;i++){
-        char ch=s.charAt(i);
-    
-    if(ch=='a' || ch=='b' || ch=='c'){
-        Str+="2";
-    }else if(ch=='d' || ch=='e' || ch=='f'){
-        Str+="3";
-    }else if(ch=='g' || ch=='h' || ch=='i'){
-        Str+="4";
-    }else if(ch=='j' || ch=='k' || ch=='l'){
-        Str+="5";
-    }else if(ch=='m' || ch=='n' || ch=='o'){
-        Str+="6";
-    }else if(ch=='p' || ch=='q' || ch=='r' || ch=='s'){
-        Str+="7";
-    }else if(ch=='t' || ch=='u' || ch=='v'){
-        Str+="8";
-    }else if(ch=='w' || ch=='x' || ch=='y' || ch=='z'){
-        Str+="9";
-    }
+   String arr[]={"2","2","2","3","3","3","4","4","4","5","5","5","6","6","6","7","7","7","7","8","8","8","9","9","9","9"};
         
+        StringBuilder sb=new  StringBuilder();
         
-    }
-    return Str;
+        for(int i=0;i<S.length();i++){
+            
+            char ch=S.charAt(i);
+            if(ch==' '){
+                sb.append("0");
+                continue;
+            }
+            sb.append(arr[ch-'a']);
+        }
+        return sb.toString();
 }
 
 //{ Driver Code Starts.
